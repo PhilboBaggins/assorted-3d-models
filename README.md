@@ -1,1 +1,1 @@
-Assorted 3D models I created mostly in OpenSCAD.
+Assorted 3D models I created, mostly with OpenSCAD.
