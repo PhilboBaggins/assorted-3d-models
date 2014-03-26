@@ -1,4 +1,16 @@
-module CpuFanCover(coverSize = 95, thickness = 2, holeSpacing = 35, holeRadius = 3, cornerRadius = 10, fn = 64)
+module ScrewHole(x, y, height, radius, fn)
+{
+    hull()
+    {
+        translate([x, y, 1])
+        cylinder(h = height, r = radius, $fn = fn);
+
+        translate([x, y, 0])
+        cylinder(h = height, r = radius*2/3, $fn = fn);
+    }
+}
+
+module CpuFanCover(coverSize = 95, thickness = 2, holeSpacing = 35.5, holeRadius = 3, cornerRadius = 8, fn = 64)
 {
     cornerRoundingPos = coverSize/2 - cornerRadius;
 
@@ -21,17 +33,10 @@ module CpuFanCover(coverSize = 95, thickness = 2, holeSpacing = 35, holeRadius =
         }
 
         // Screw holes
-        translate([holeSpacing, holeSpacing, 0])
-        cylinder(h = thickness, r = holeRadius, $fn = fn);
-
-        translate([-holeSpacing, holeSpacing, 0])
-        cylinder(h = thickness, r = holeRadius, $fn = fn);
-
-        translate([holeSpacing, -holeSpacing, 0])
-        cylinder(h = thickness, r = holeRadius, $fn = fn);
-
-        translate([-holeSpacing, -holeSpacing, 0])
-        cylinder(h = thickness, r = holeRadius, $fn = fn);
+        ScrewHole( holeSpacing,  holeSpacing, thickness, holeRadius, fn);
+        ScrewHole(-holeSpacing,  holeSpacing, thickness, holeRadius, fn);
+        ScrewHole( holeSpacing, -holeSpacing, thickness, holeRadius, fn);
+        ScrewHole(-holeSpacing, -holeSpacing, thickness, holeRadius, fn);
     }
 }
 
