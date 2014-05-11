@@ -1,8 +1,8 @@
 /*
- * Small spear tip modelled on a Zulu short spear. Made for my father's scount troop.
+ * Small spear tip modelled on a Zulu short spear. Made for my father's scout troop.
  */
 
-module SpearTip(length = 120, width = 30, height = 8, thickness = 1)
+module SpearTip(length = 180, width = 60, height = 16, thickness = 2)
 {
     widestPointX =  length * 8 / 10; // X axis position of widest point
 
@@ -21,7 +21,7 @@ module SpearTip(length = 120, width = 30, height = 8, thickness = 1)
     }
 
     translate([length, 0, 0])
-    cube([30, width/3, thickness], center = true);
+    cube([length/4, width/2, thickness], center = true);
 }
 
 SpearTip();
