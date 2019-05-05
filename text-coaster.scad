@@ -48,5 +48,25 @@ module TextCoaster(text,
     }
 }
 
-translate([ 0, 0, 0]) TextCoaster("#!");
-translate([75, 0, 0]) TextCoaster("A");
+module TextCoasterArray(textArray)
+{
+    for (idx = [0 : 1 : len(textArray) - 1])
+    {
+        text = textArray[idx];
+        xOffsef = (5 + DEFAULT_TEXT_COASTER_SIZE[0]) * idx;
+        yOffset = DEFAULT_TEXT_COASTER_SIZE[1] + 5;
+
+        translate([xOffsef, 0, 0])
+        TextCoaster(text);
+
+        translate([xOffsef, yOffset, 0])
+        TextCoaster(text, resizeTextHeight=false);
+    }
+}
+
+TextCoasterArray([
+    "#!",
+    "A",
+    "ABCD",
+    "ABCDE",
+]);
