@@ -4,7 +4,7 @@ DEFAULT_FONT = "Roboto";
 
 DEFAULT_TEXT_COASTER_SIZE = [70, 70, 3];
 
-module centeredText(text, area, font)
+module centeredText(text, area, resizeTextHeight, font)
 {
     length = area[0];
     height = area[1];
@@ -12,13 +12,14 @@ module centeredText(text, area, font)
 
     translate([(length / -2), 0, (depth / -2)])
     linear_extrude(depth)
-    resize([length, height], auto = true)
+    resize([length, resizeTextHeight ? height : 0], auto = true)
     text(text, font, valign = "center");
 }
 
 module TextCoaster(text,
     boxSize=DEFAULT_TEXT_COASTER_SIZE,
-    font=DEFAULT_FONT)
+    font=DEFAULT_FONT,
+    resizeTextHeight=true)
 {
     MARGIN_WIDTH = boxSize[2] / 2;
 
@@ -43,7 +44,7 @@ module TextCoaster(text,
         // Text
         textArea = boxSize - [MARGIN_WIDTH*6, MARGIN_WIDTH*6, 0];
         translate([0, 0,  boxSize[2] - TEXT_DEPTH])
-        centeredText(text, textArea, font);
+        centeredText(text, textArea, resizeTextHeight, font);
     }
 }
 
